@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>카페인 섭취 관리</title>
+<style>
+  body { font-family: Arial; padding: 20px; }
+  input, button { margin: 5px; padding: 5px; }
+</style>
+</head>
+<body>
+
+<h2>☕ 카페인 섭취 관리</h2>
+
+<h3>1. 개인 정보 입력</h3>
+몸무게(kg): <input type="number" id="weight"><br>
+<button onclick="calculateLimit()">적정 섭취량 계산</button>
+
+<p id="limitResult"></p>
+
+<hr>
+
+<h3>2. 섭취 기록</h3>
+<select id="drink">
+  <option value="80">아메리카노 (80mg)</option>
+  <option value="150">에너지드링크 (150mg)</option>
+  <option value="40">콜라 (40mg)</option>
+  <option value="25">초콜릿 (25mg)</option>
+</select>
+
+<button onclick="addCaffeine()">추가</button>
+
+<p id="total"></p>
+<p id="remain"></p>
+
+<script>
+let maxCaffeine = 0;
+let totalCaffeine = 0;
+
+// 개인별 카페인 계산 (예시: 1kg당 3mg)
+function calculateLimit() {
+    let weight = document.getElementById("weight").value;
+    maxCaffeine = weight * 3;
+    document.getElementById("limitResult").innerText =
+        "하루 적정 카페인 섭취량: " + maxCaffeine + " mg";
+}
+
+// 섭취 추가
+function addCaffeine() {
+    let drink = document.getElementById("drink").value;
+    totalCaffeine += parseInt(drink);
+
+    document.getElementById("total").innerText =
+        "현재 섭취량: " + totalCaffeine + " mg";
+
+    let remain = maxCaffeine - totalCaffeine;
+
+    if (remain > 0) {
+        document.getElementById("remain").innerText =
+            "추가로 " + remain + " mg 섭취 가능";
+    } else {
+        document.getElementById("remain").innerText =
+            "⚠️ 섭취량 초과!";
+    }
+}
+</script>
+
+</body>
+</html>
