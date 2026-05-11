@@ -2,68 +2,503 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>카페인 섭취 관리</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>카페인 1일 권장량 계산기</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  body { font-family: Arial; padding: 20px; }
-  input, button { margin: 5px; padding: 5px; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F5F0E8;
+    --surface: #FDFAF4;
+    --surface2: #EDE8DC;
+    --border: rgba(80,60,30,0.15);
+    --border2: rgba(80,60,30,0.28);
+    --text: #1A1510;
+    --text2: #6B5E4A;
+    --text3: #9E8E78;
+    --accent: #C4581A;
+    --accent-light: #F5DFD0;
+    --accent-text: #7A2F06;
+    --green: #3B6D11;
+    --green-light: #EAF3DE;
+    --amber: #BA7517;
+    --amber-light: #FAEEDA;
+    --red: #A32D2D;
+    --red-light: #FCEBEB;
+    --radius: 10px;
+    --radius-lg: 16px;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  /* Header */
+  header {
+    background: var(--text);
+    color: var(--bg);
+    padding: 3rem 2rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    right: -60px; top: -60px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: rgba(196,88,26,0.18);
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    right: 60px; bottom: -80px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: rgba(196,88,26,0.10);
+  }
+  .header-inner { max-width: 680px; margin: 0 auto; position: relative; z-index: 1; }
+  .header-tag {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+  }
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1.1;
+    color: var(--bg);
+    margin-bottom: 0.75rem;
+  }
+  .header-sub {
+    font-size: 14px;
+    color: rgba(245,240,232,0.6);
+    line-height: 1.6;
+  }
+
+  /* Main */
+  main { max-width: 680px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+
+  /* Section card */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .card-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px;
+    color: var(--text);
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-title span.num {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* Form row */
+  .form-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .form-field { flex: 1; min-width: 150px; }
+  .form-label {
+    display: block;
+    font-size: 12px;
+    color: var(--text2);
+    margin-bottom: 6px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+  }
+  input[type=number], select {
+    width: 100%;
+    padding: 10px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: var(--bg);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius);
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    transition: border-color 0.2s;
+  }
+  input[type=number]:focus, select:focus { border-color: var(--accent); }
+  .select-wrap { position: relative; }
+  .select-wrap::after {
+    content: '▾';
+    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+    color: var(--text3); pointer-events: none; font-size: 12px;
+  }
+
+  /* Std selector */
+  .std-group { display: flex; gap: 8px; flex-wrap: wrap; }
+  .std-btn {
+    padding: 8px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    border: 1px solid var(--border2);
+    border-radius: 100px;
+    background: var(--bg);
+    color: var(--text2);
+    cursor: pointer;
+    transition: all 0.18s;
+  }
+  .std-btn:hover { border-color: var(--accent); color: var(--accent-text); }
+  .std-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  /* Factor toggles */
+  .factor-group { display: flex; gap: 8px; flex-wrap: wrap; }
+  .factor-btn {
+    padding: 7px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    border: 1px solid var(--border2);
+    border-radius: var(--radius);
+    background: var(--bg);
+    color: var(--text2);
+    cursor: pointer;
+    transition: all 0.18s;
+  }
+  .factor-btn:hover { border-color: var(--amber); }
+  .factor-btn.on {
+    background: var(--amber-light);
+    border-color: var(--amber);
+    color: #633806;
+  }
+
+  /* Results */
+  .result-section { margin-top: 1.5rem; }
+  .result-header {
+    font-family: 'DM Serif Display', serif;
+    font-size: 13px;
+    color: var(--text3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap: 10px; }
+  .metric {
+    background: var(--surface2);
+    border-radius: var(--radius);
+    padding: 16px;
+    transition: transform 0.2s;
+  }
+  .metric:first-child { background: var(--accent-light); }
+  .metric-val {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    color: var(--text);
+    line-height: 1;
+  }
+  .metric:first-child .metric-val { color: var(--accent-text); }
+  .metric-unit { font-size: 14px; color: var(--text2); margin-left: 2px; }
+  .metric-lbl { font-size: 12px; color: var(--text2); margin-top: 6px; }
+  .metric-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+  /* Bar */
+  .bar-area { margin-top: 1.5rem; }
+  .bar-label-row {
+    display: flex; justify-content: space-between;
+    font-size: 12px; color: var(--text3); margin-bottom: 8px;
+  }
+  .bar-track {
+    height: 10px; border-radius: 5px;
+    background: var(--surface2);
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%; border-radius: 5px;
+    transition: width 0.5s cubic-bezier(0.4,0,0.2,1), background 0.3s;
+  }
+
+  /* Drinks */
+  .drinks-section { margin-top: 1.5rem; }
+  .drinks-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px,1fr)); gap: 8px; }
+  .drink-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px;
+    transition: border-color 0.2s;
+  }
+  .drink-card:hover { border-color: var(--border2); }
+  .drink-icon { font-size: 18px; margin-bottom: 6px; }
+  .drink-name { font-size: 12px; color: var(--text2); margin-bottom: 4px; }
+  .drink-cups { font-size: 16px; font-weight: 500; color: var(--text); }
+  .drink-mg { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+  /* Note */
+  .note-box {
+    margin-top: 1.25rem;
+    padding: 12px 16px;
+    background: var(--surface2);
+    border-radius: var(--radius);
+    border-left: 3px solid var(--accent);
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.65;
+  }
+  .factor-note {
+    border-left-color: var(--amber);
+    background: var(--amber-light);
+    color: #633806;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 2rem 1.25rem;
+    font-size: 12px;
+    color: var(--text3);
+    border-top: 1px solid var(--border);
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  @media (max-width: 480px) {
+    .form-field { min-width: 100%; }
+    .std-group, .factor-group { gap: 6px; }
+  }
 </style>
 </head>
 <body>
 
-<h2>☕ 카페인 섭취 관리</h2>
+<header>
+  <div class="header-inner">
+    <div class="header-tag">건강 계산기</div>
+    <h1>카페인<br>1일 권장량</h1>
+    <p class="header-sub">EFSA · FDA · Health Canada 기준 적용<br>체중·체질·건강 상태를 반영한 개인 맞춤 계산</p>
+  </div>
+</header>
 
-<h3>1. 개인 정보 입력</h3>
-몸무게(kg): <input type="number" id="weight"><br>
-<button onclick="calculateLimit()">적정 섭취량 계산</button>
+<main>
 
-<p id="limitResult"></p>
+  <!-- 기본 정보 -->
+  <div class="card">
+    <div class="card-title"><span class="num">1</span> 기본 정보</div>
+    <div class="form-row">
+      <div class="form-field">
+        <label class="form-label" for="weight">체중 (kg)</label>
+        <input type="number" id="weight" value="65" min="30" max="150" step="1">
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="age">연령대</label>
+        <div class="select-wrap">
+          <select id="age">
+            <option value="adult">성인 (19세 이상)</option>
+            <option value="teen">청소년 (13~18세)</option>
+            <option value="child">어린이 (~12세)</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="pregnant">임신·수유 여부</label>
+        <div class="select-wrap">
+          <select id="pregnant">
+            <option value="no">해당 없음</option>
+            <option value="yes">임신 중 또는 수유 중</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<hr>
+  <!-- 기준 기관 -->
+  <div class="card">
+    <div class="card-title"><span class="num">2</span> 기준 기관</div>
+    <div class="std-group">
+      <button class="std-btn active" data-std="efsa">EFSA (유럽식품안전청)</button>
+      <button class="std-btn" data-std="fda">FDA (미국)</button>
+      <button class="std-btn" data-std="hc">Health Canada</button>
+    </div>
+  </div>
 
-<h3>2. 섭취 기록</h3>
-<select id="drink">
-  <option value="80">아메리카노 (80mg)</option>
-  <option value="150">에너지드링크 (150mg)</option>
-  <option value="40">콜라 (40mg)</option>
-  <option value="25">초콜릿 (25mg)</option>
-</select>
+  <!-- 체질 요인 -->
+  <div class="card">
+    <div class="card-title"><span class="num">3</span> 체질 요인 (해당 항목 모두 선택)</div>
+    <div class="factor-group">
+      <button class="factor-btn" data-key="slow">느린 대사형 (CYP1A2)</button>
+      <button class="factor-btn" data-key="anxiety">불안장애 / 공황</button>
+      <button class="factor-btn" data-key="bp">고혈압 / 심장 질환</button>
+      <button class="factor-btn" data-key="stomach">위염 / 역류성 식도염</button>
+      <button class="factor-btn" data-key="sleep">수면 장애</button>
+      <button class="factor-btn" data-key="sensitive">카페인 민감 체질</button>
+    </div>
+  </div>
 
-<button onclick="addCaffeine()">추가</button>
+  <!-- 결과 -->
+  <div class="card result-section" id="result-card">
+    <div class="result-header">계산 결과</div>
+    <div class="metrics" id="metrics"></div>
+    <div class="bar-area" id="bar-area"></div>
+    <div class="drinks-section">
+      <div class="result-header" style="margin-top:1.5rem">음료별 하루 허용 잔 수</div>
+      <div class="drinks-grid" id="drinks-grid"></div>
+    </div>
+    <div id="note-box"></div>
+  </div>
 
-<p id="total"></p>
-<p id="remain"></p>
+</main>
+
+<footer>
+  본 계산기는 참고용이며 의료 조언을 대체하지 않습니다.<br>
+  기준: <a href="https://www.efsa.europa.eu/en/topics/topic/caffeine" target="_blank">EFSA</a> · <a href="https://www.scientificamerican.com/article/how-much-caffeine-is-too-much/" target="_blank">FDA</a> · <a href="https://www.canada.ca/en/health-canada/services/food-nutrition/food-safety/food-additives/caffeine/foods.html" target="_blank">Health Canada</a>
+</footer>
 
 <script>
-let maxCaffeine = 0;
-let totalCaffeine = 0;
+const factors = {};
+let currentStd = 'efsa';
 
-// 개인별 카페인 계산 (예시: 1kg당 3mg)
-function calculateLimit() {
-    let weight = document.getElementById("weight").value;
-    maxCaffeine = weight * 3;
-    document.getElementById("limitResult").innerText =
-        "하루 적정 카페인 섭취량: " + maxCaffeine + " mg";
+const standards = {
+  efsa: {
+    name: 'EFSA',
+    adultMgKg: 5.7, adultMax: 400,
+    teenMgKg: 3,    teenMax: 200,
+    childMgKg: 3,   childMax: 100,
+    pregMax: 200,
+    note: 'EFSA(유럽식품안전청): 성인 하루 400mg 상한, 체중 기준 약 5.7mg/kg. 1회 섭취는 3mg/kg(약 200mg) 이내 권장.'
+  },
+  fda: {
+    name: 'FDA',
+    adultMgKg: 5,   adultMax: 400,
+    teenMgKg: 2.5,  teenMax: 100,
+    childMgKg: 2.5, childMax: 45,
+    pregMax: 200,
+    note: 'FDA(미국 식품의약국): 성인 체중 kg당 5mg, 최대 400mg/일. 어린이·청소년은 2.5mg/kg/일.'
+  },
+  hc: {
+    name: 'Health Canada',
+    adultMgKg: 5.7, adultMax: 400,
+    teenMgKg: 2.5,  teenMax: 100,
+    childMgKg: 2.5, childMax: 45,
+    pregMax: 300,
+    note: 'Health Canada(캐나다 보건부): 성인 400mg/일, 청소년·어린이 2.5mg/kg/일, 임신부 300mg/일.'
+  }
+};
+
+const drinks = [
+  { name: '아메리카노', mg: 150, icon: '☕' },
+  { name: '에스프레소', mg: 68,  icon: '☕' },
+  { name: '캔커피',    mg: 75,  icon: '🥫' },
+  { name: '녹차',     mg: 30,  icon: '🍵' },
+  { name: '에너지드링크', mg: 105, icon: '⚡' },
+];
+
+function calc() {
+  const w = parseFloat(document.getElementById('weight').value) || 65;
+  const age = document.getElementById('age').value;
+  const preg = document.getElementById('pregnant').value;
+  const std = standards[currentStd];
+
+  let base;
+  if (age === 'child')     base = Math.min(Math.round(w * std.childMgKg), std.childMax);
+  else if (age === 'teen') base = Math.min(Math.round(w * std.teenMgKg), std.teenMax);
+  else                     base = Math.min(Math.round(w * std.adultMgKg), std.adultMax);
+
+  if (preg === 'yes') base = Math.min(base, std.pregMax);
+
+  let multiplier = 1.0;
+  const active = [];
+  if (factors.slow)     { multiplier = Math.min(multiplier, 0.6); active.push('느린 대사형'); }
+  if (factors.anxiety)  { multiplier = Math.min(multiplier, 0.5); active.push('불안장애/공황'); }
+  if (factors.bp)       { multiplier = Math.min(multiplier, 0.6); active.push('고혈압/심장'); }
+  if (factors.stomach)  { multiplier = Math.min(multiplier, 0.7); active.push('위장 질환'); }
+  if (factors.sleep)    { multiplier = Math.min(multiplier, 0.6); active.push('수면 장애'); }
+  if (factors.sensitive){ multiplier = Math.min(multiplier, 0.5); active.push('민감 체질'); }
+
+  const limit = Math.round(base * multiplier);
+  const single = Math.round(limit / 3);
+  const target = Math.round(limit * 0.6);
+  const pct = Math.min(Math.round((limit / 400) * 100), 100);
+  const barColor = limit >= 300 ? '#3B6D11' : limit >= 150 ? '#BA7517' : '#A32D2D';
+
+  document.getElementById('metrics').innerHTML = `
+    <div class="metric">
+      <div class="metric-val">${limit}<span class="metric-unit">mg</span></div>
+      <div class="metric-lbl">하루 최대 권장량</div>
+      <div class="metric-sub">${std.name} 기준</div>
+    </div>
+    <div class="metric">
+      <div class="metric-val">${single}<span class="metric-unit">mg</span></div>
+      <div class="metric-lbl">1회 권장 상한</div>
+      <div class="metric-sub">하루 3회 분할 기준</div>
+    </div>
+    <div class="metric">
+      <div class="metric-val">${target}<span class="metric-unit">mg</span></div>
+      <div class="metric-lbl">적정 섭취 목표</div>
+      <div class="metric-sub">상한의 60%</div>
+    </div>
+  `;
+
+  document.getElementById('bar-area').innerHTML = `
+    <div class="bar-label-row">
+      <span>성인 최대 상한(400mg) 대비</span>
+      <span>${pct}%</span>
+    </div>
+    <div class="bar-track">
+      <div class="bar-fill" style="width:${pct}%; background:${barColor}"></div>
+    </div>
+  `;
+
+  document.getElementById('drinks-grid').innerHTML = drinks.map(d => `
+    <div class="drink-card">
+      <div class="drink-icon">${d.icon}</div>
+      <div class="drink-name">${d.name}</div>
+      <div class="drink-cups">${(limit / d.mg).toFixed(1)}잔</div>
+      <div class="drink-mg">1잔 ≈ ${d.mg}mg</div>
+    </div>
+  `).join('');
+
+  document.getElementById('note-box').innerHTML = active.length
+    ? `<div class="note-box factor-note">적용된 감량 요인: ${active.join(', ')} → 기준량의 ${Math.round(multiplier*100)}%로 조정되었습니다.</div>`
+    : `<div class="note-box">${std.note}</div>`;
 }
 
-// 섭취 추가
-function addCaffeine() {
-    let drink = document.getElementById("drink").value;
-    totalCaffeine += parseInt(drink);
+document.getElementById('weight').addEventListener('input', calc);
+document.getElementById('age').addEventListener('change', calc);
+document.getElementById('pregnant').addEventListener('change', calc);
 
-    document.getElementById("total").innerText =
-        "현재 섭취량: " + totalCaffeine + " mg";
+document.querySelectorAll('.std-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.std-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentStd = btn.dataset.std;
+    calc();
+  });
+});
 
-    let remain = maxCaffeine - totalCaffeine;
+document.querySelectorAll('.factor-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const k = btn.dataset.key;
+    factors[k] = !factors[k];
+    btn.classList.toggle('on', factors[k]);
+    calc();
+  });
+});
 
-    if (remain > 0) {
-        document.getElementById("remain").innerText =
-            "추가로 " + remain + " mg 섭취 가능";
-    } else {
-        document.getElementById("remain").innerText =
-            "⚠️ 섭취량 초과!";
-    }
-}
+calc();
 </script>
-
 </body>
 </html>
