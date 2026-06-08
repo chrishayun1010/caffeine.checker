@@ -26,6 +26,8 @@
     --amber-light: #FAEEDA;
     --red: #A32D2D;
     --red-light: #FCEBEB;
+    --purple: #6B3FA0;
+    --purple-light: #F0E8FF;
     --radius: 10px;
     --radius-lg: 16px;
   }
@@ -35,10 +37,8 @@
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
-    padding: 0;
   }
 
-  /* Header */
   header {
     background: var(--text);
     color: var(--bg);
@@ -48,238 +48,141 @@
   }
   header::before {
     content: '';
-    position: absolute;
-    right: -60px; top: -60px;
+    position: absolute; right: -60px; top: -60px;
     width: 280px; height: 280px;
     border-radius: 50%;
     background: rgba(196,88,26,0.18);
   }
   header::after {
     content: '';
-    position: absolute;
-    right: 60px; bottom: -80px;
+    position: absolute; right: 60px; bottom: -80px;
     width: 180px; height: 180px;
     border-radius: 50%;
     background: rgba(196,88,26,0.10);
   }
   .header-inner { max-width: 680px; margin: 0 auto; position: relative; z-index: 1; }
-  .header-tag {
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 0.75rem;
-    font-weight: 500;
-  }
-  h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(2rem, 5vw, 3rem);
-    line-height: 1.1;
-    color: var(--bg);
-    margin-bottom: 0.75rem;
-  }
-  .header-sub {
-    font-size: 14px;
-    color: rgba(245,240,232,0.6);
-    line-height: 1.6;
-  }
+  .header-tag { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; font-weight: 500; }
+  h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.1; color: var(--bg); margin-bottom: 0.75rem; }
+  .header-sub { font-size: 14px; color: rgba(245,240,232,0.6); line-height: 1.6; }
 
-  /* Main */
   main { max-width: 680px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
 
-  /* Section card */
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 1.5rem;
-    margin-bottom: 1rem;
-  }
-  .card-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: 16px;
-    color: var(--text);
-    margin-bottom: 1.25rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .card-title span.num {
-    width: 24px; height: 24px;
-    border-radius: 50%;
-    background: var(--accent);
-    color: #fff;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 12px;
-    font-weight: 500;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-  }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1rem; }
+  .card-title { font-family: 'DM Serif Display', serif; font-size: 16px; color: var(--text); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 8px; }
+  .card-title span.num { width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #fff; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 
-  /* Form row */
   .form-row { display: flex; gap: 12px; flex-wrap: wrap; }
   .form-field { flex: 1; min-width: 150px; }
-  .form-label {
-    display: block;
-    font-size: 12px;
-    color: var(--text2);
-    margin-bottom: 6px;
-    font-weight: 500;
-    letter-spacing: 0.03em;
-  }
-  input[type=number], select {
-    width: 100%;
-    padding: 10px 14px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    color: var(--text);
-    background: var(--bg);
-    border: 1px solid var(--border2);
-    border-radius: var(--radius);
-    outline: none;
-    appearance: none;
-    -webkit-appearance: none;
-    transition: border-color 0.2s;
-  }
+  .form-label { display: block; font-size: 12px; color: var(--text2); margin-bottom: 6px; font-weight: 500; letter-spacing: 0.03em; }
+  input[type=number], select { width: 100%; padding: 10px 14px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--text); background: var(--bg); border: 1px solid var(--border2); border-radius: var(--radius); outline: none; appearance: none; -webkit-appearance: none; transition: border-color 0.2s; }
   input[type=number]:focus, select:focus { border-color: var(--accent); }
   .select-wrap { position: relative; }
-  .select-wrap::after {
-    content: '▾';
-    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
-    color: var(--text3); pointer-events: none; font-size: 12px;
-  }
+  .select-wrap::after { content: '▾'; position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--text3); pointer-events: none; font-size: 12px; }
 
-  /* Std selector */
   .std-group { display: flex; gap: 8px; flex-wrap: wrap; }
-  .std-btn {
-    padding: 8px 16px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    border: 1px solid var(--border2);
-    border-radius: 100px;
-    background: var(--bg);
-    color: var(--text2);
-    cursor: pointer;
-    transition: all 0.18s;
-  }
+  .std-btn { padding: 8px 16px; font-family: 'DM Sans', sans-serif; font-size: 13px; border: 1px solid var(--border2); border-radius: 100px; background: var(--bg); color: var(--text2); cursor: pointer; transition: all 0.18s; }
   .std-btn:hover { border-color: var(--accent); color: var(--accent-text); }
-  .std-btn.active {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #fff;
-  }
+  .std-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
 
-  /* Factor toggles */
   .factor-group { display: flex; gap: 8px; flex-wrap: wrap; }
-  .factor-btn {
-    padding: 7px 14px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    border: 1px solid var(--border2);
-    border-radius: var(--radius);
-    background: var(--bg);
-    color: var(--text2);
-    cursor: pointer;
-    transition: all 0.18s;
-  }
+  .factor-btn { padding: 7px 14px; font-family: 'DM Sans', sans-serif; font-size: 13px; border: 1px solid var(--border2); border-radius: var(--radius); background: var(--bg); color: var(--text2); cursor: pointer; transition: all 0.18s; }
   .factor-btn:hover { border-color: var(--amber); }
-  .factor-btn.on {
-    background: var(--amber-light);
-    border-color: var(--amber);
-    color: #633806;
-  }
+  .factor-btn.on { background: var(--amber-light); border-color: var(--amber); color: #633806; }
 
-  /* Results */
-  .result-section { margin-top: 1.5rem; }
-  .result-header {
-    font-family: 'DM Serif Display', serif;
-    font-size: 13px;
-    color: var(--text3);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-bottom: 1rem;
-  }
+  /* 섭취 속도 */
+  .speed-group { display: flex; gap: 8px; flex-wrap: wrap; }
+  .speed-btn { flex: 1; min-width: 110px; padding: 10px 12px; font-family: 'DM Sans', sans-serif; font-size: 13px; border: 1px solid var(--border2); border-radius: var(--radius); background: var(--bg); color: var(--text2); cursor: pointer; transition: all 0.18s; text-align: center; }
+  .speed-btn .speed-icon { font-size: 20px; display: block; margin-bottom: 4px; }
+  .speed-btn .speed-name { font-weight: 500; display: block; font-size: 13px; }
+  .speed-btn .speed-desc { font-size: 11px; color: var(--text3); display: block; margin-top: 2px; }
+  .speed-btn:hover { border-color: var(--accent); }
+  .speed-btn.active { background: var(--accent-light); border-color: var(--accent); color: var(--accent-text); }
+  .speed-btn.active .speed-desc { color: var(--accent); }
+  .speed-info-box { margin-top: 12px; padding: 10px 14px; background: var(--surface2); border-radius: var(--radius); font-size: 12.5px; color: var(--text2); line-height: 1.6; border-left: 3px solid var(--accent); }
+
+  /* 결과 */
+  .result-header { font-family: 'DM Serif Display', serif; font-size: 13px; color: var(--text3); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1rem; }
   .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap: 10px; }
-  .metric {
-    background: var(--surface2);
-    border-radius: var(--radius);
-    padding: 16px;
-    transition: transform 0.2s;
-  }
+  .metric { background: var(--surface2); border-radius: var(--radius); padding: 16px; }
   .metric:first-child { background: var(--accent-light); }
-  .metric-val {
-    font-family: 'DM Serif Display', serif;
-    font-size: 28px;
-    color: var(--text);
-    line-height: 1;
-  }
+  .metric-val { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--text); line-height: 1; }
   .metric:first-child .metric-val { color: var(--accent-text); }
   .metric-unit { font-size: 14px; color: var(--text2); margin-left: 2px; }
   .metric-lbl { font-size: 12px; color: var(--text2); margin-top: 6px; }
   .metric-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
 
-  /* Bar */
-  .bar-area { margin-top: 1.5rem; }
-  .bar-label-row {
-    display: flex; justify-content: space-between;
-    font-size: 12px; color: var(--text3); margin-bottom: 8px;
-  }
-  .bar-track {
-    height: 10px; border-radius: 5px;
-    background: var(--surface2);
-    overflow: hidden;
-  }
-  .bar-fill {
-    height: 100%; border-radius: 5px;
-    transition: width 0.5s cubic-bezier(0.4,0,0.2,1), background 0.3s;
-  }
+  .speed-metrics { margin-top: 10px; display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap: 8px; }
+  .speed-metric { background: var(--purple-light); border: 1px solid rgba(107,63,160,0.2); border-radius: var(--radius); padding: 12px; }
+  .speed-metric-val { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--purple); line-height: 1.2; }
+  .speed-metric-lbl { font-size: 11px; color: #6B3FA0; margin-top: 5px; opacity: 0.8; }
 
-  /* Drinks */
-  .drinks-section { margin-top: 1.5rem; }
+  .bar-area { margin-top: 1.5rem; }
+  .bar-label-row { display: flex; justify-content: space-between; font-size: 12px; color: var(--text3); margin-bottom: 8px; }
+  .bar-track { height: 10px; border-radius: 5px; background: var(--surface2); overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 5px; transition: width 0.5s cubic-bezier(0.4,0,0.2,1), background 0.3s; }
+
   .drinks-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px,1fr)); gap: 8px; }
-  .drink-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 12px;
-    transition: border-color 0.2s;
-  }
-  .drink-card:hover { border-color: var(--border2); }
+  .drink-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; }
   .drink-icon { font-size: 18px; margin-bottom: 6px; }
   .drink-name { font-size: 12px; color: var(--text2); margin-bottom: 4px; }
   .drink-cups { font-size: 16px; font-weight: 500; color: var(--text); }
   .drink-mg { font-size: 11px; color: var(--text3); margin-top: 2px; }
 
-  /* Note */
-  .note-box {
-    margin-top: 1.25rem;
-    padding: 12px 16px;
-    background: var(--surface2);
-    border-radius: var(--radius);
-    border-left: 3px solid var(--accent);
-    font-size: 13px;
-    color: var(--text2);
-    line-height: 1.65;
-  }
-  .factor-note {
-    border-left-color: var(--amber);
-    background: var(--amber-light);
-    color: #633806;
-  }
+  .note-box { margin-top: 1.25rem; padding: 12px 16px; background: var(--surface2); border-radius: var(--radius); border-left: 3px solid var(--accent); font-size: 13px; color: var(--text2); line-height: 1.65; }
+  .factor-note { border-left-color: var(--amber); background: var(--amber-light); color: #633806; }
 
-  /* Footer */
-  footer {
-    text-align: center;
-    padding: 2rem 1.25rem;
-    font-size: 12px;
-    color: var(--text3);
-    border-top: 1px solid var(--border);
-  }
+  /* 약물 섹션 */
+  .drug-section-title { font-family: 'DM Serif Display', serif; font-size: 16px; color: var(--text); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 8px; }
+  .drug-section-title span.num { width: 24px; height: 24px; border-radius: 50%; background: var(--red); color: #fff; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+  .drug-toggles { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1rem; }
+  .drug-toggle-btn { padding: 7px 14px; font-family: 'DM Sans', sans-serif; font-size: 12px; border: 1px solid var(--border2); border-radius: 100px; background: var(--bg); color: var(--text2); cursor: pointer; transition: all 0.18s; }
+  .drug-toggle-btn:hover { border-color: var(--red); }
+  .drug-toggle-btn.on { background: var(--red-light); border-color: var(--red); color: var(--red); font-weight: 500; }
+
+  .drug-warning-list { display: flex; flex-direction: column; gap: 10px; }
+  .drug-warning-card { border-radius: var(--radius); padding: 14px 16px; border-left: 4px solid; display: none; animation: fadeIn 0.25s ease; }
+  .drug-warning-card.visible { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+  .drug-warning-card.level-high { background: #FFF0F0; border-color: #C0392B; }
+  .drug-warning-card.level-mid  { background: var(--amber-light); border-color: var(--amber); }
+  .drug-warning-card.level-low  { background: #FFF8E1; border-color: #E4A900; }
+
+  .dwc-header { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px; }
+  .dwc-badge { font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 100px; flex-shrink: 0; margin-top: 2px; }
+  .level-high .dwc-badge { background: #C0392B; color: #fff; }
+  .level-mid  .dwc-badge { background: var(--amber); color: #fff; }
+  .level-low  .dwc-badge { background: #E4A900; color: #fff; }
+  .dwc-name { font-weight: 500; font-size: 14px; color: var(--text); }
+  .dwc-category { font-size: 11px; color: var(--text3); margin-top: 1px; }
+  .dwc-body { font-size: 13px; color: var(--text2); line-height: 1.65; }
+  .dwc-examples { margin-top: 8px; padding: 8px 12px; background: rgba(0,0,0,0.04); border-radius: 6px; font-size: 12px; color: var(--text2); }
+  .dwc-examples strong { font-weight: 500; color: var(--text); }
+
+  /* 안전 시간표 */
+  .safe-time-table { margin-top: 1.25rem; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); }
+  .stt-header { background: var(--text); color: var(--bg); padding: 10px 16px; font-size: 12px; font-weight: 500; letter-spacing: 0.05em; }
+  .stt-col-head { display: grid; grid-template-columns: 1.6fr 1fr 1.8fr; padding: 6px 16px; font-size: 11px; color: var(--text3); letter-spacing: 0.05em; border-bottom: 1px solid var(--border); background: var(--surface2); }
+  .stt-row { display: grid; grid-template-columns: 1.6fr 1fr 1.8fr; padding: 10px 16px; border-bottom: 1px solid var(--border); font-size: 13px; align-items: center; background: var(--surface); }
+  .stt-row:last-child { border-bottom: none; }
+  .stt-row:hover { background: var(--surface2); }
+  .stt-drug { color: var(--text); font-weight: 500; display: flex; align-items: center; gap: 6px; }
+  .stt-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .stt-time { font-family: 'DM Serif Display', serif; font-size: 15px; color: var(--accent-text); }
+  .stt-reason { font-size: 11.5px; color: var(--text3); line-height: 1.5; }
+
+  .drug-empty { text-align: center; padding: 2rem; color: var(--text3); font-size: 13px; background: var(--surface2); border-radius: var(--radius); }
+  .drug-empty .emoji { font-size: 28px; display: block; margin-bottom: 8px; }
+
+  footer { text-align: center; padding: 2rem 1.25rem; font-size: 12px; color: var(--text3); border-top: 1px solid var(--border); }
   footer a { color: var(--accent); text-decoration: none; }
 
   @media (max-width: 480px) {
     .form-field { min-width: 100%; }
-    .std-group, .factor-group { gap: 6px; }
+    .speed-btn { min-width: 80px; }
+    .stt-col-head, .stt-row { grid-template-columns: 1.3fr 0.9fr 1.5fr; font-size: 11.5px; padding: 8px 12px; }
+    .stt-time { font-size: 13px; }
   }
 </style>
 </head>
@@ -289,13 +192,13 @@
   <div class="header-inner">
     <div class="header-tag">건강 계산기</div>
     <h1>카페인<br>1일 권장량</h1>
-    <p class="header-sub">EFSA · FDA · Health Canada 기준 적용<br>체중·체질·건강 상태를 반영한 개인 맞춤 계산</p>
+    <p class="header-sub">EFSA · FDA · Health Canada 기준 적용<br>체중·체질·건강 상태·섭취 속도 반영 + 약물 상호작용 경고</p>
   </div>
 </header>
 
 <main>
 
-  <!-- 기본 정보 -->
+  <!-- 1. 기본 정보 -->
   <div class="card">
     <div class="card-title"><span class="num">1</span> 기본 정보</div>
     <div class="form-row">
@@ -325,7 +228,7 @@
     </div>
   </div>
 
-  <!-- 기준 기관 -->
+  <!-- 2. 기준 기관 -->
   <div class="card">
     <div class="card-title"><span class="num">2</span> 기준 기관</div>
     <div class="std-group">
@@ -335,7 +238,7 @@
     </div>
   </div>
 
-  <!-- 체질 요인 -->
+  <!-- 3. 체질 요인 -->
   <div class="card">
     <div class="card-title"><span class="num">3</span> 체질 요인 (해당 항목 모두 선택)</div>
     <div class="factor-group">
@@ -348,16 +251,136 @@
     </div>
   </div>
 
+  <!-- 4. 섭취 속도 (신규) -->
+  <div class="card">
+    <div class="card-title"><span class="num">4</span> 섭취 속도</div>
+    <div class="speed-group">
+      <button class="speed-btn active" data-speed="normal">
+        <span class="speed-icon">🚶</span>
+        <span class="speed-name">보통</span>
+        <span class="speed-desc">30~60분에 1잔</span>
+      </button>
+      <button class="speed-btn" data-speed="slow">
+        <span class="speed-icon">🐢</span>
+        <span class="speed-name">천천히</span>
+        <span class="speed-desc">2시간 이상에 1잔</span>
+      </button>
+      <button class="speed-btn" data-speed="fast">
+        <span class="speed-icon">⚡</span>
+        <span class="speed-name">빠르게</span>
+        <span class="speed-desc">30분 이내 1잔 이상</span>
+      </button>
+      <button class="speed-btn" data-speed="shot">
+        <span class="speed-icon">💥</span>
+        <span class="speed-name">한 번에</span>
+        <span class="speed-desc">에너지샷·고농도</span>
+      </button>
+    </div>
+    <div class="speed-info-box" id="speed-info-box"></div>
+  </div>
+
   <!-- 결과 -->
-  <div class="card result-section" id="result-card">
+  <div class="card" id="result-card">
     <div class="result-header">계산 결과</div>
     <div class="metrics" id="metrics"></div>
+    <div id="speed-metrics"></div>
     <div class="bar-area" id="bar-area"></div>
-    <div class="drinks-section">
-      <div class="result-header" style="margin-top:1.5rem">음료별 하루 허용 잔 수</div>
+    <div style="margin-top:1.5rem">
+      <div class="result-header">음료별 하루 허용 잔 수</div>
       <div class="drinks-grid" id="drinks-grid"></div>
     </div>
     <div id="note-box"></div>
+  </div>
+
+  <!-- 5. 약물 상호작용 경고 (신규) -->
+  <div class="card">
+    <div class="drug-section-title"><span class="num">!</span> 다른 약물과의 상호작용 경고</div>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:1rem;line-height:1.6;">복용 중이거나 해당하는 항목을 선택하면 카페인과의 위험 상호작용을 확인할 수 있습니다.</p>
+    <div class="drug-toggles" id="drug-toggles">
+      <button class="drug-toggle-btn" data-drug="ssri">💊 항우울제 (SSRI)</button>
+      <button class="drug-toggle-btn" data-drug="maoi">⚠️ MAOI 계열</button>
+      <button class="drug-toggle-btn" data-drug="stimulant">⚡ 각성제·ADHD약</button>
+      <button class="drug-toggle-btn" data-drug="blood_thinner">🩸 혈액희석제</button>
+      <button class="drug-toggle-btn" data-drug="beta_blocker">🫀 베타차단제</button>
+      <button class="drug-toggle-btn" data-drug="thyroid">🔬 갑상선 약</button>
+      <button class="drug-toggle-btn" data-drug="antibiotic">💉 퀴놀론계 항생제</button>
+      <button class="drug-toggle-btn" data-drug="sleep_aid">🌙 수면제·진정제</button>
+      <button class="drug-toggle-btn" data-drug="alcohol">🍺 알코올 (음주)</button>
+      <button class="drug-toggle-btn" data-drug="energy">🥤 에너지드링크 중복</button>
+    </div>
+    <div class="drug-warning-list" id="drug-warning-list">
+      <div class="drug-empty" id="drug-empty">
+        <span class="emoji">💊</span>
+        위에서 해당 약물·항목을 선택하면<br>상호작용 경고가 여기에 표시됩니다.
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. 안전 대기 시간표 (신규) -->
+  <div class="card">
+    <div class="drug-section-title"><span class="num" style="background:var(--purple)">⏱</span> 카페인 섭취 후 약물 복용 권장 대기 시간</div>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:1rem;line-height:1.6;">카페인 반감기는 약 <strong>5~6시간</strong>입니다. 약물 종류에 따라 권장 대기 시간이 다르며, 복용 중인 약이 있다면 반드시 의사·약사와 상담하세요.</p>
+    <div class="safe-time-table">
+      <div class="stt-header">⏰ 카페인 마지막 섭취 후 권장 대기 시간</div>
+      <div class="stt-col-head">
+        <span>약물 / 항목</span>
+        <span>대기 시간</span>
+        <span>이유</span>
+      </div>
+      <div class="stt-row">
+        <div class="stt-drug"><span class="stt-dot" style="background:#C0392B"></span>MAOI 계열 항우울제</div>
+        <div class="stt-time">12시간 이상</div>
+        <div class="stt-reason">고혈압 위기 및 세로토닌 증후군 위험. 가능하면 동일 일 내 섭취 금지.</div>
+      </div>
+      <div class="stt-row">
+        <div class="stt-drug"><span class="stt-dot" style="background:#C0392B"></span>각성제 (리탈린·애더럴)</div>
+        <div class="stt-time">6~8시간</div>
+        <div class="stt-reason">심박수·혈압 과도 상승, 과각성·불안 증폭.</div>
+      </div>
+      <div class="stt-row">
+        <div class="stt-drug"><span class="stt-dot" style="background:#C0392B"></span>퀴놀론계 항생제</div>
+        <div class="stt-time">3~4시간</div>
+        <div class="stt-reason">CYP1A2 억제로 카페인 혈중 농도 최대 4배 상승.</div>
+      </div>
+      <div class="stt-row">
+        <div class="stt-drug"><span class="stt-dot" style="background:#E4A900"></span>갑상선 약 (레보티록신)</div>
+        <div class="stt-time">4시간</div>
+        <div class="stt-reason">카페인이 약 흡수율을 최대 36% 감소시킴.</div>
+      </div>
+      <div class="stt-row">
+        <div class="stt-drug"><span class="stt-dot" style="background:#E4A900"></span>SSRI 항우울제</div>
+        <div class="stt-time">2~3시간</div>
+        <div class="stt-reason">불안·초조 부작용 증폭. 세로토닌 활성 상호작용.</div>
+      </div>
+      <div class="stt-row">
+        <div class="stt-drug"><span class="stt-dot" style="background:#BA7517"></span>혈액희석제 (와파린)</div>
+        <div class="stt-time">2시간</div>
+        <div class="stt-reason">대량 카페인은 와파린 대사 변화 및 출혈 위험 증가.</div>
+      </div>
+      <div class="stt-row">
+        <div class="stt-drug"><span class="stt-dot" style="background:#BA7517"></span>베타차단제</div>
+        <div class="stt-time">2시간</div>
+        <div class="stt-reason">카페인이 혈압·맥박 저하 효과를 방해할 수 있음.</div>
+      </div>
+      <div class="stt-row">
+        <div class="stt-drug"><span class="stt-dot" style="background:#3B6D11"></span>철분제</div>
+        <div class="stt-time">1~2시간</div>
+        <div class="stt-reason">탄닌 포함 카페인 음료가 철분 흡수를 최대 40% 감소.</div>
+      </div>
+      <div class="stt-row">
+        <div class="stt-drug"><span class="stt-dot" style="background:#3B6D11"></span>수면제·진정제</div>
+        <div class="stt-time">취침 6시간 전</div>
+        <div class="stt-reason">카페인이 수면제 효능을 약화시키고 수면 구조를 방해.</div>
+      </div>
+      <div class="stt-row">
+        <div class="stt-drug"><span class="stt-dot" style="background:#6B3FA0"></span>알코올 (음주)</div>
+        <div class="stt-time">병용 금지</div>
+        <div class="stt-reason">카페인이 취기 신호를 억제해 과음·탈수 위험 급증.</div>
+      </div>
+    </div>
+    <div class="note-box" style="margin-top:1rem;font-size:12px;">
+      ⚕️ 위 수치는 일반적인 참고 기준입니다. 복용 중인 약의 용량·개인 대사·질환 유무에 따라 차이가 있으므로 담당 의사·약사와 반드시 상담하세요.
+    </div>
   </div>
 
 </main>
@@ -370,40 +393,61 @@
 <script>
 const factors = {};
 let currentStd = 'efsa';
+let currentSpeed = 'normal';
+const activeDrugs = new Set();
 
 const standards = {
-  efsa: {
-    name: 'EFSA',
-    adultMgKg: 5.7, adultMax: 400,
-    teenMgKg: 3,    teenMax: 200,
-    childMgKg: 3,   childMax: 100,
-    pregMax: 200,
-    note: 'EFSA(유럽식품안전청): 성인 하루 400mg 상한, 체중 기준 약 5.7mg/kg. 1회 섭취는 3mg/kg(약 200mg) 이내 권장.'
-  },
-  fda: {
-    name: 'FDA',
-    adultMgKg: 5,   adultMax: 400,
-    teenMgKg: 2.5,  teenMax: 100,
-    childMgKg: 2.5, childMax: 45,
-    pregMax: 200,
-    note: 'FDA(미국 식품의약국): 성인 체중 kg당 5mg, 최대 400mg/일. 어린이·청소년은 2.5mg/kg/일.'
-  },
-  hc: {
-    name: 'Health Canada',
-    adultMgKg: 5.7, adultMax: 400,
-    teenMgKg: 2.5,  teenMax: 100,
-    childMgKg: 2.5, childMax: 45,
-    pregMax: 300,
-    note: 'Health Canada(캐나다 보건부): 성인 400mg/일, 청소년·어린이 2.5mg/kg/일, 임신부 300mg/일.'
-  }
+  efsa: { name:'EFSA', adultMgKg:5.7, adultMax:400, teenMgKg:3, teenMax:200, childMgKg:3, childMax:100, pregMax:200, note:'EFSA(유럽식품안전청): 성인 하루 400mg 상한, 체중 기준 약 5.7mg/kg. 1회 섭취는 3mg/kg(약 200mg) 이내 권장.' },
+  fda:  { name:'FDA',  adultMgKg:5,   adultMax:400, teenMgKg:2.5,teenMax:100, childMgKg:2.5,childMax:45, pregMax:200, note:'FDA(미국 식품의약국): 성인 체중 kg당 5mg, 최대 400mg/일. 어린이·청소년은 2.5mg/kg/일.' },
+  hc:   { name:'Health Canada', adultMgKg:5.7, adultMax:400, teenMgKg:2.5,teenMax:100, childMgKg:2.5,childMax:45, pregMax:300, note:'Health Canada(캐나다 보건부): 성인 400mg/일, 청소년·어린이 2.5mg/kg/일, 임신부 300mg/일.' }
+};
+
+const speedData = {
+  normal: { limitMult:1.0,  singleMult:1.0,  peakTime:'45~60분', clearTime:'5~6시간', adjText:'–', info:'보통 속도(30~60분에 1잔): 간이 카페인을 충분히 분해할 시간을 확보합니다. 혈중 농도가 급격히 오르지 않아 가장 권장되는 패턴입니다.' },
+  slow:   { limitMult:1.1,  singleMult:1.0,  peakTime:'60~90분', clearTime:'5~6시간', adjText:'소폭 여유 +10%', info:'천천히 섭취(2시간 이상에 1잔): 혈중 농도가 완만하게 유지됩니다. 민감한 체질에도 유리하며 하루 총량을 소폭 여유 있게 설정합니다.' },
+  fast:   { limitMult:0.8,  singleMult:0.7,  peakTime:'20~30분', clearTime:'4~5시간', adjText:'한도 -20%, 1회 -30%', info:'빠른 섭취(30분 이내 1잔 이상): 혈중 카페인 농도가 급격히 상승합니다. 심박수 증가·손 떨림 위험이 있어 1회 상한 및 하루 총량을 자동으로 줄여 적용합니다.' },
+  shot:   { limitMult:0.65, singleMult:0.5,  peakTime:'15~20분', clearTime:'4~5시간', adjText:'한도 -35%, 1회 -50%', info:'한 번에 고농도 섭취(에너지샷 등): 혈중 피크가 15~20분 이내로 폭발적으로 상승합니다. 심계항진·불안 발작 위험이 높아 하루 총량과 1회 상한 모두 크게 낮춥니다.' }
+};
+
+const drugWarnings = {
+  ssri: { name:'SSRI 항우울제', category:'플루옥세틴(프로작), 설트랄린(졸로프트), 에스시탈로프람(렉사프로) 등', level:'mid', badge:'주의',
+    desc:'카페인과 SSRI를 병용하면 불안·초조·불면이 악화될 수 있습니다. 카페인은 세로토닌 신호 전달에 간접적으로 영향을 미쳐 약효 변동을 일으킬 수 있습니다.',
+    examples:'💊 대표 약품: 프로작(플루옥세틴), 팍실(파록세틴), 렉사프로(에스시탈로프람), 졸로프트(설트랄린)' },
+  maoi: { name:'MAOI 계열 항우울제', category:'페넬진, 트라닐시프로민, 이소카복사지드 등', level:'high', badge:'위험',
+    desc:'카페인과 MAOI 병용은 심각한 고혈압 위기와 세로토닌 증후군 위험을 초래할 수 있습니다. 두통·흉통·목 뻣뻣함이 나타나면 즉시 응급실을 방문하세요.',
+    examples:'💊 대표 약품: 나르딜(페넬진), 파르네이트(트라닐시프로민), 마플란(이소카복사지드). 일부 파킨슨병 약(셀레길린)도 MAOI 계열.' },
+  stimulant: { name:'각성제 / ADHD 치료제', category:'메틸페니데이트(리탈린), 암페타민(애더럴), 아토목세틴 등', level:'high', badge:'위험',
+    desc:'카페인과 각성제를 함께 섭취하면 교감신경이 과도하게 자극되어 심박수·혈압이 위험 수준으로 오를 수 있습니다. 불면·불안·식욕저하도 심화됩니다.',
+    examples:'💊 대표 약품: 리탈린·콘서타(메틸페니데이트), 스트라테라(아토목세틴), 비반스(리스덱삼페타민)' },
+  blood_thinner: { name:'혈액희석제 (항응고제)', category:'와파린, 아스피린 고용량, 리바록사반 등', level:'mid', badge:'주의',
+    desc:'다량의 카페인은 와파린 대사에 영향을 줘 항응고 효과를 예측하기 어렵게 만들 수 있습니다. 멍·출혈이 평소보다 잘 생기면 의사와 상담이 필요합니다.',
+    examples:'💊 대표 약품: 쿠마딘(와파린), 자렐토(리바록사반), 엘리퀴스(아픽사반), 고용량 아스피린' },
+  beta_blocker: { name:'베타차단제 (혈압·심장약)', category:'아테놀롤, 메토프롤롤, 카르베딜롤 등', level:'mid', badge:'주의',
+    desc:'카페인은 심박수와 혈압을 높여 베타차단제의 조절 효과를 방해할 수 있습니다. 관상동맥 질환·부정맥이 있다면 섭취량을 최소화해야 합니다.',
+    examples:'💊 대표 약품: 테노민(아테놀롤), 로프레서(메토프롤롤), 코레그(카르베딜롤), 인데랄(프로프라놀롤)' },
+  thyroid: { name:'갑상선 약 (레보티록신)', category:'신지로이드, 씬트로이드 등 T4 제제', level:'low', badge:'참고',
+    desc:'카페인 음료와 함께 복용하면 레보티록신 흡수율이 최대 36% 감소한다는 연구 결과가 있습니다. 갑상선 약은 물(물만)과 함께 복용하고 카페인 음료는 최소 30~60분 후에 드세요.',
+    examples:'💊 대표 약품: 신지로이드·씬트로이드(레보티록신). 복합 제제(리오티로닌 포함)도 해당.' },
+  antibiotic: { name:'퀴놀론계 항생제', category:'시프로플록사신, 에녹사신, 노르플록사신 등', level:'high', badge:'위험',
+    desc:'퀴놀론계 항생제는 CYP1A2 효소를 억제하여 카페인 혈중 농도를 최대 4배까지 높일 수 있습니다. 항생제 복용 기간 중에는 카페인 섭취를 크게 줄여야 합니다.',
+    examples:'💊 대표 약품: 시프로(시프로플록사신), 레바퀸(레보플록사신), 아벨록스(목시플록사신). ※ 레보플록사신은 억제 효과가 상대적으로 낮음.' },
+  sleep_aid: { name:'수면제 / 진정제', category:'졸피뎀, 벤조디아제핀계, 항히스타민계 수면보조제 등', level:'mid', badge:'주의',
+    desc:'카페인은 중추신경을 각성시켜 수면제의 효능을 크게 약화시킵니다. 수면제 복용 예정일에는 오후 2시 이후 카페인 섭취를 피하세요.',
+    examples:'💊 대표 약품: 스틸녹스(졸피뎀), 할시온(트리아졸람), 도미쿰(미다졸람), 유니솜·드림스(항히스타민계)' },
+  alcohol: { name:'알코올 (음주)', category:'맥주, 소주, 와인, 칵테일 등 모든 주류', level:'high', badge:'위험',
+    desc:'카페인은 알코올 졸음·피로 신호를 억제하여 자신이 얼마나 취했는지 느끼기 어렵게 만듭니다. 이로 인해 과음·탈수·사고 위험이 급증합니다.',
+    examples:'⚠️ 위험 조합: 카페인+소주(폭탄주), 에너지드링크+보드카, 커피+위스키. 모두 단독 음주보다 탈수·과음 위험이 높음.' },
+  energy: { name:'에너지드링크 중복 섭취', category:'레드불, 몬스터, 핫식스, 번 등', level:'mid', badge:'주의',
+    desc:'에너지드링크에는 카페인 외 타우린·B비타민·당류가 고농도로 포함됩니다. 다른 카페인 음료와 중복 섭취 시 일일 권장량을 초과하기 쉽고 심계항진·두통으로 이어질 수 있습니다.',
+    examples:'🥤 대표 제품: 레드불(80mg/250ml), 몬스터(160mg/473ml), 핫식스(60mg/250ml), 번(150mg/500ml)' }
 };
 
 const drinks = [
-  { name: '아메리카노', mg: 150, icon: '☕' },
-  { name: '에스프레소', mg: 68,  icon: '☕' },
-  { name: '캔커피',    mg: 75,  icon: '🥫' },
-  { name: '녹차',     mg: 30,  icon: '🍵' },
-  { name: '에너지드링크', mg: 105, icon: '⚡' },
+  { name:'아메리카노', mg:150, icon:'☕' },
+  { name:'에스프레소', mg:68,  icon:'☕' },
+  { name:'캔커피',    mg:75,  icon:'🥫' },
+  { name:'녹차',     mg:30,  icon:'🍵' },
+  { name:'에너지드링크',mg:105, icon:'⚡' },
 ];
 
 function calc() {
@@ -411,39 +455,40 @@ function calc() {
   const age = document.getElementById('age').value;
   const preg = document.getElementById('pregnant').value;
   const std = standards[currentStd];
+  const spd = speedData[currentSpeed];
 
   let base;
   if (age === 'child')     base = Math.min(Math.round(w * std.childMgKg), std.childMax);
   else if (age === 'teen') base = Math.min(Math.round(w * std.teenMgKg), std.teenMax);
   else                     base = Math.min(Math.round(w * std.adultMgKg), std.adultMax);
-
   if (preg === 'yes') base = Math.min(base, std.pregMax);
 
-  let multiplier = 1.0;
+  let mult = 1.0;
   const active = [];
-  if (factors.slow)     { multiplier = Math.min(multiplier, 0.6); active.push('느린 대사형'); }
-  if (factors.anxiety)  { multiplier = Math.min(multiplier, 0.5); active.push('불안장애/공황'); }
-  if (factors.bp)       { multiplier = Math.min(multiplier, 0.6); active.push('고혈압/심장'); }
-  if (factors.stomach)  { multiplier = Math.min(multiplier, 0.7); active.push('위장 질환'); }
-  if (factors.sleep)    { multiplier = Math.min(multiplier, 0.6); active.push('수면 장애'); }
-  if (factors.sensitive){ multiplier = Math.min(multiplier, 0.5); active.push('민감 체질'); }
+  if (factors.slow)     { mult = Math.min(mult, 0.6); active.push('느린 대사형'); }
+  if (factors.anxiety)  { mult = Math.min(mult, 0.5); active.push('불안장애/공황'); }
+  if (factors.bp)       { mult = Math.min(mult, 0.6); active.push('고혈압/심장'); }
+  if (factors.stomach)  { mult = Math.min(mult, 0.7); active.push('위장 질환'); }
+  if (factors.sleep)    { mult = Math.min(mult, 0.6); active.push('수면 장애'); }
+  if (factors.sensitive){ mult = Math.min(mult, 0.5); active.push('민감 체질'); }
 
-  const limit = Math.round(base * multiplier);
-  const single = Math.round(limit / 3);
+  const baseLimit = Math.round(base * mult);
+  const limit  = Math.round(baseLimit * spd.limitMult);
+  const single = Math.round((baseLimit / 3) * spd.singleMult);
   const target = Math.round(limit * 0.6);
-  const pct = Math.min(Math.round((limit / 400) * 100), 100);
+  const pct    = Math.min(Math.round((limit / 400) * 100), 100);
   const barColor = limit >= 300 ? '#3B6D11' : limit >= 150 ? '#BA7517' : '#A32D2D';
 
   document.getElementById('metrics').innerHTML = `
     <div class="metric">
       <div class="metric-val">${limit}<span class="metric-unit">mg</span></div>
       <div class="metric-lbl">하루 최대 권장량</div>
-      <div class="metric-sub">${std.name} 기준</div>
+      <div class="metric-sub">${std.name} + 속도 반영</div>
     </div>
     <div class="metric">
       <div class="metric-val">${single}<span class="metric-unit">mg</span></div>
       <div class="metric-lbl">1회 권장 상한</div>
-      <div class="metric-sub">하루 3회 분할 기준</div>
+      <div class="metric-sub">속도 조정 포함</div>
     </div>
     <div class="metric">
       <div class="metric-val">${target}<span class="metric-unit">mg</span></div>
@@ -452,28 +497,82 @@ function calc() {
     </div>
   `;
 
-  document.getElementById('bar-area').innerHTML = `
-    <div class="bar-label-row">
-      <span>성인 최대 상한(400mg) 대비</span>
-      <span>${pct}%</span>
-    </div>
-    <div class="bar-track">
-      <div class="bar-fill" style="width:${pct}%; background:${barColor}"></div>
+  document.getElementById('speed-metrics').innerHTML = `
+    <div class="speed-metrics">
+      <div class="speed-metric">
+        <div class="speed-metric-val">${spd.peakTime}</div>
+        <div class="speed-metric-lbl">혈중 농도 최고치 도달</div>
+      </div>
+      <div class="speed-metric">
+        <div class="speed-metric-val">${spd.clearTime}</div>
+        <div class="speed-metric-lbl">체내 반감기</div>
+      </div>
+      <div class="speed-metric">
+        <div class="speed-metric-val" style="font-size:15px">${spd.adjText}</div>
+        <div class="speed-metric-lbl">속도에 따른 한도 조정</div>
+      </div>
     </div>
   `;
 
-  document.getElementById('drinks-grid').innerHTML = drinks.map(d => `
-    <div class="drink-card">
+  document.getElementById('bar-area').innerHTML = `
+    <div class="bar-label-row"><span>성인 최대 상한(400mg) 대비</span><span>${pct}%</span></div>
+    <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${barColor}"></div></div>
+  `;
+
+  document.getElementById('drinks-grid').innerHTML = drinks.map(d =>
+    `<div class="drink-card">
       <div class="drink-icon">${d.icon}</div>
       <div class="drink-name">${d.name}</div>
       <div class="drink-cups">${(limit / d.mg).toFixed(1)}잔</div>
       <div class="drink-mg">1잔 ≈ ${d.mg}mg</div>
-    </div>
-  `).join('');
+    </div>`
+  ).join('');
 
-  document.getElementById('note-box').innerHTML = active.length
-    ? `<div class="note-box factor-note">적용된 감량 요인: ${active.join(', ')} → 기준량의 ${Math.round(multiplier*100)}%로 조정되었습니다.</div>`
+  let noteHtml = active.length
+    ? `<div class="note-box factor-note">적용된 감량 요인: ${active.join(', ')} → 기준량의 ${Math.round(mult*100)}%로 조정</div>`
     : `<div class="note-box">${std.note}</div>`;
+  if (currentSpeed !== 'normal') {
+    noteHtml += `<div class="note-box" style="margin-top:8px;border-left-color:var(--purple);background:var(--purple-light);color:#3d1a7a;">🔵 ${spd.info}</div>`;
+  }
+  document.getElementById('note-box').innerHTML = noteHtml;
+}
+
+function renderDrugWarnings() {
+  const list = document.getElementById('drug-warning-list');
+  const empty = document.getElementById('drug-empty');
+  document.querySelectorAll('.drug-warning-card').forEach(c => c.remove());
+
+  if (activeDrugs.size === 0) {
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+
+  // sort by severity
+  const order = { high: 0, mid: 1, low: 2 };
+  const sorted = [...activeDrugs].sort((a,b) => order[drugWarnings[a].level] - order[drugWarnings[b].level]);
+
+  sorted.forEach(key => {
+    const d = drugWarnings[key];
+    const card = document.createElement('div');
+    card.className = `drug-warning-card level-${d.level} visible`;
+    card.innerHTML = `
+      <div class="dwc-header">
+        <span class="dwc-badge">${d.badge}</span>
+        <div>
+          <div class="dwc-name">${d.name}</div>
+          <div class="dwc-category">${d.category}</div>
+        </div>
+      </div>
+      <div class="dwc-body">${d.desc}</div>
+      <div class="dwc-examples"><strong>예시 약품·항목</strong><br>${d.examples}</div>
+    `;
+    list.appendChild(card);
+  });
+}
+
+function updateSpeedInfo() {
+  document.getElementById('speed-info-box').innerHTML = speedData[currentSpeed].info;
 }
 
 document.getElementById('weight').addEventListener('input', calc);
@@ -498,6 +597,26 @@ document.querySelectorAll('.factor-btn').forEach(btn => {
   });
 });
 
+document.querySelectorAll('.speed-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentSpeed = btn.dataset.speed;
+    updateSpeedInfo();
+    calc();
+  });
+});
+
+document.querySelectorAll('.drug-toggle-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const key = btn.dataset.drug;
+    if (activeDrugs.has(key)) { activeDrugs.delete(key); btn.classList.remove('on'); }
+    else                       { activeDrugs.add(key);    btn.classList.add('on');    }
+    renderDrugWarnings();
+  });
+});
+
+updateSpeedInfo();
 calc();
 </script>
 </body>
